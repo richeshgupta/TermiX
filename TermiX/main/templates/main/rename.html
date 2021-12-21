@@ -1,0 +1,63 @@
+{% extends 'main/basic.html' %}
+{% block 'head' %}
+<title>File Organizer | TermiX</title>
+{% endblock 'head' %}
+{% block 'body' %}
+<div class="row">
+    <div class="coloumn">
+        <br />
+        <h1 class="text-warning">Bulk Renaming</h1>
+        <br />
+        <form>
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="formGroupExampleInput">Enter Folder Path</label>
+              <input type="text" class="form-control" name="path" placeholder="Enter absolute path of directory where you want to apply operation">
+              <label for="formGroupExampleInput">Enter New Name</label>
+              <input type="text" class="form-control" name="new_name" placeholder="Enter New Name">
+              <label for="formGroupExampleInput">Enter Extensions Ex: .txt</label>
+              <input type="text" class="form-control" name="ext" placeholder="Extensions">
+            </div>
+                <br />
+            </form>
+                <button type="submit" id="check-btn" class="btn btn-primary"> Rename</button>
+              
+              
+            
+    </div>
+</div>
+
+{% endblock 'body' %}
+
+{% block 'script' %}
+<script>
+    jQuery("#check-btn").click(()=>{
+
+        path = $('input[name=path]').val();
+        new_name = $('input[name=new_name]').val();
+        ext = $('input[name=ext]').val();
+        
+        alert(path);
+
+
+
+        $.ajax({
+
+
+
+            url:"bulk_renaming",
+            type:"POST",
+            dataType:"json",
+            data:{
+                folder_path:path,
+                new_name:new_name,
+                ext:ext,
+                csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val(),
+            },
+           
+        });
+    }
+    );
+
+</script>
+{% endblock 'script' %}    

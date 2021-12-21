@@ -3,10 +3,49 @@
         <title>TermiX | Home</title>
 {% endblock 'head' %}
 {% block 'body' %}
-    <div class="container-fluid text-center">
-        <h1 class="text-info">
-            TermiX
-        </h1>
-    </div>
+
+<div class="row mt-3">
+        <div class="column ">
+                <h2 class="text text-primary ">Operations</h2>
+                
+        </div>
+</div>
+<div class="row mt-2">
+        <div class="column text-start">
+                <h3 class="text-muted">Directory</h3>
+                        <ol>
+                        <li> 
+                                <a href="{% url 'organize-files' %}" class="btn btn-success btn-sm mt-2">
+                                         Organize Files
+                                </a>
+                        
+                        </li>
+                        <li>
+                                <a href="{% url 'renaming-api' %}" class="btn btn-success btn-sm mt-2">
+                                        Bulk Rename Files
+                               </a>   
+                        </li>
+                        </ol>   
+                <h3 class="text-muted">Utility</h3>
+                <ol>
+                        <li> 
+                                <a href="{% url 'diff-api' %}" class="btn btn-success btn-sm mt-2">
+                                         Diff Tool
+                                </a>
+                        
+                        </li>
+                </ol>
+                <h3 class="text-muted">Crawler</h3>
+                <ol>
+                        <li> 
+                                <a href="{% url 'find-all' %}" class="btn btn-success btn-sm mt-2">
+                                         Find All Links
+                                </a>
+                        
+                        </li>
+                </ol>
+
+        </div>
+</div>
 
 {% endblock 'body' %}

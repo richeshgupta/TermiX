@@ -1,0 +1,68 @@
+{% extends 'main/basic.html' %}
+{% block 'head' %}
+<title>File Organizer | TermiX</title>
+{% endblock 'head' %}
+{% block 'body' %}
+<div class="row">
+    <div class="coloumn">
+        <br />
+        <h1 class="text-warning">Diff Tool</h1>
+        <br />
+        <form>
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="formGroupExampleInput">Enter File 1 path</label>
+              <input type="text" class="form-control" name="f1" placeholder="Enter absolute path of directory where you want to apply operation">
+              <label for="formGroupExampleInput">Enter File 2 path</label>
+              <input type="text" class="form-control" name="f2" placeholder="Enter absolute path of directory where you want to apply operation">
+              
+            </div>
+                <br />
+            </form>
+                <button type="submit" id="check-btn" class="btn btn-primary">Analyze</button>
+            
+            <h4 class="text text-info" id="data-show"></h4>
+
+              
+            
+    </div>
+</div>
+
+{% endblock 'body' %}
+
+{% block 'script' %}
+<script>
+    jQuery("#check-btn").click(()=>{
+
+        var f1 = $('input[name=f1]').val();
+        var f2 = $('input[name=f2]').val();
+        
+
+
+
+        $.ajax({
+
+
+
+            url:"diff-tool",
+            type:"POST",
+            dataType:"json",
+            data:{
+               f1:f1,
+               f2:f2,
+                csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val(),
+            },
+            complete:function(data)
+            {
+                $('div[class=form-group]').hide();
+                $('button').hide();
+                $('h4').html(data.responseText + "% Similarity Found");
+                // alert(data.responseText);
+            },
+           
+        });
+    }
+    );
+
+</script>
+{% endblock 'script' %}    

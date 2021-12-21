@@ -1,0 +1,66 @@
+{% extends 'main/basic.html' %}
+{% block 'head' %}
+<title>Find All links from a Website | TermiX</title>
+{% endblock 'head' %}
+{% block 'body' %}
+<div class="row">
+    <div class="coloumn">
+        <br />
+        <h1 class="text-warning">Find All links from a Website</h1>
+        <br />
+        <form>
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="formGroupExampleInput">Enter Website Path include "http"</label>
+              <input type="text" class="form-control" name="path" placeholder="Enter absolute path of directory where you want to apply operation">
+            </div>
+                <br />
+            </form>
+                <button type="submit" id="check-btn" class="btn btn-primary"> Find Links</button>
+            <h5 class="text text-success" id="show-links">
+
+            </h5>  
+              
+            
+    </div>
+</div>
+
+{% endblock 'body' %}
+
+{% block 'script' %}
+<script>
+    jQuery("#check-btn").click(()=>{
+
+        path = $('input[name=path]').val();
+        alert(path);
+
+
+        function show_link(value, index, array)
+        {
+            $('div[class=form-group]').hide();
+            $('button').hide();
+            console.log(value);
+            var links = "<a href=" + value + " >" + value + "</a>";
+            $('h5[id=show-links]').append(links);
+        }
+        $.ajax({
+
+
+
+            url:"find-all-api",
+            type:"POST",
+            dataType:"json",
+            data:{
+                path:path,
+                csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val(),
+            },
+            // complete:function(p){
+            //     p.forEach(show_link);
+            // },
+           
+        });
+    }
+    );
+
+</script>
+{% endblock 'script' %}    

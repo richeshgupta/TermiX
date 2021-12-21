@@ -1,0 +1,54 @@
+{% extends 'main/basic.html' %}
+{% block 'head' %}
+<title>File Organizer | TermiX</title>
+{% endblock 'head' %}
+{% block 'body' %}
+<div class="row">
+    <div class="coloumn">
+        <br />
+        <h1 class="text-warning">File Organizer</h1>
+        <br />
+        <form>
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="formGroupExampleInput">Enter Absolute Path</label>
+              <input type="text" class="form-control" name="path" placeholder="Enter absolute path of directory where you want to apply operation">
+            </div>
+                <br />
+            </form>
+                <button type="submit" id="check-btn" class="btn btn-primary"> Organize</button>
+              
+              
+            
+    </div>
+</div>
+
+{% endblock 'body' %}
+
+{% block 'script' %}
+<script>
+    jQuery("#check-btn").click(()=>{
+
+        path = $('input[name=path]').val();
+        alert(path);
+
+
+
+        $.ajax({
+
+
+
+            url:"organize-files-api",
+            type:"POST",
+            dataType:"json",
+            data:{
+                path:path,
+                csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val(),
+            },
+           
+        });
+    }
+    );
+
+</script>
+{% endblock 'script' %}    

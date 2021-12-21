@@ -40,7 +40,7 @@ INSTALLED_APPS = [
 
     #own
     'scripts',
-    'main'
+    'main',
 ]
 
 MIDDLEWARE = [
