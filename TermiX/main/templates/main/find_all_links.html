@@ -17,9 +17,9 @@
                 <br />
             </form>
                 <button type="submit" id="check-btn" class="btn btn-primary"> Find Links</button>
-            <h5 class="text text-success" id="show-links">
+            <ol class="text text-success" id="show-links">
 
-            </h5>  
+            </ol>  
               
             
     </div>
@@ -32,21 +32,18 @@
     jQuery("#check-btn").click(()=>{
 
         path = $('input[name=path]').val();
-        alert(path);
+        // alert(path);
 
 
-        function show_link(value, index, array)
+       
+        function showw(value,index,array)
         {
             $('div[class=form-group]').hide();
             $('button').hide();
-            console.log(value);
-            var links = "<a href=" + value + " >" + value + "</a>";
-            $('h5[id=show-links]').append(links);
+            var links = "<li><a class=' mb-1' href=" + value + " >" + value + "</a></li><br />";
+            $('ol[id=show-links]').append(links);
         }
-        $.ajax({
-
-
-
+    $.ajax({
             url:"find-all-api",
             type:"POST",
             dataType:"json",
@@ -54,9 +51,11 @@
                 path:path,
                 csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val(),
             },
-            // complete:function(p){
-            //     p.forEach(show_link);
-            // },
+            success:function(data){
+                var z = data['links'];
+                z.forEach(showw);
+                
+            },  
            
         });
     }

@@ -11,7 +11,9 @@
         <form>
             {% csrf_token %}
             <div class="form-group">
-              <label for="formGroupExampleInput">Enter Absolute Path</label>
+              <label for="formGroupExampleInput">Enter Image Path</label>
+              <input type="text" class="form-control" name="path" placeholder="Enter absolute path of directory where you want to apply operation">
+              <label for="formGroupExampleInput">Enter Image Path</label>
               <input type="text" class="form-control" name="path" placeholder="Enter absolute path of directory where you want to apply operation">
             </div>
                 <br />

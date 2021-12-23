@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from .python_scripts.dir.organize_dir import organize
 from .python_scripts.dir.rename import rename_files_main
 from django.http import HttpResponse
-
+import json
 # /home/richeshgupta/pro/TermiX/TermiX/scripts/python-scripts/dir/organize_dir.py
 def organize_files(request):
     return render(request,"main/organize-files.html",{})
@@ -64,7 +64,7 @@ def crawler_all_links_api(request):
     if request.method=="POST":
         url = request.POST.getlist('path')[0]
         resp = get_all_links(url)
-        print(resp)
-        return HttpResponse(resp)
+        resp = json.dumps(resp)
+        return HttpResponse(resp,content_type="application/json")
     else:
         return render(request,"main/find_all_links.html",{})

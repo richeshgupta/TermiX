@@ -1,6 +1,6 @@
 import requests
 import re
-
+import json
 def get_all_links(url):
 # get url
     # url = input('Enter a URL (include `http://`): ')
@@ -15,8 +15,10 @@ def get_all_links(url):
     links = re.findall('"((http|ftp)s?://.*?)"', html)
 
 # output links
-    resp = []
+    resp = {'links':[]}
     for link in links:
-        resp.append(link[0])
+        resp['links'].append(link[0])
+    # print("response dict : ",resp)
+    # print("resp : ",resp)
     return resp
     
